@@ -1,0 +1,28 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class telat_bayar extends CI_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+		if (!$this->session->has_userdata('login_token'))
+		{
+			redirect('login');
+		}
+		$this->load->model('builder');
+	}
+
+	public function index()
+	{
+		$data = $this->builder->setTable('telat_bayar')->get(['order_by' => ['id', 'desc']])->result_array();
+		$this->load->view('templates/header');
+		$this->load->view('telat_bayar/index', ['data' => $data]);
+		$this->load->view('templates/footer');
+	}
+
+	public function excel()
+	{
+		$data = $this->builder->setTable('telat_bayar')->get(['order_by' => ['id', 'desc']])->result_array();
+		$this->load->view('telat_bayar/excel', ['data' => $data]);
+	}
+}
