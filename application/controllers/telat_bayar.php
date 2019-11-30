@@ -9,12 +9,12 @@ class telat_bayar extends CI_Controller
 		{
 			redirect('login');
 		}
-		$this->load->model('builder');
+		$this->load->model('Builder');
 	}
 
 	public function index()
 	{
-		$data = $this->builder->setTable('telat_bayar')->get(['order_by' => ['id', 'desc']])->result_array();
+		$data = $this->Builder->setTable('telat_bayar')->get(['order_by' => ['id', 'desc']])->result_array();
 		$this->load->view('templates/header');
 		$this->load->view('telat_bayar/index', ['data' => $data]);
 		$this->load->view('templates/footer');
@@ -22,7 +22,7 @@ class telat_bayar extends CI_Controller
 
 	public function excel()
 	{
-		$data = $this->builder->setTable('telat_bayar')->get(['order_by' => ['id', 'desc']])->result_array();
+		$data = $this->Builder->setTable('telat_bayar')->get(['order_by' => ['id', 'desc']])->result_array();
 		$this->load->view('telat_bayar/excel', ['data' => $data]);
 	}
 }

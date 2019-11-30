@@ -6,7 +6,7 @@ class Auth extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper('cookie');
-		$this->load->model('builder');
+		$this->load->model('Builder');
 	}
 
 	public function index()
@@ -32,7 +32,7 @@ class Auth extends CI_Controller
 
 	public function authenticate()
 	{
-		$user = $this->builder->setTable('users')->get(['where' => ['username', $this->input->post('username')]])->row_array();
+		$user = $this->Builder->setTable('users')->get(['where' => ['username', $this->input->post('username')]])->row_array();
 
 		if ($_COOKIE['login_failed'] >= 5) {
 			$message = '<div class="alert alert-danger alert-dismissible">

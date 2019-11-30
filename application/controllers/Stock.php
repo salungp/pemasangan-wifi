@@ -9,12 +9,12 @@ class Stock extends CI_Controller
 		{
 			redirect('login');
 		}
-		$this->load->model('builder');
+		$this->load->model('Builder');
 	}
 
 	public function index()
 	{
-		$stock = $this->builder->setTable('stocks')->get(['order_by' => ['id', 'desc']])->result_array();
+		$stock = $this->Builder->setTable('stocks')->get(['order_by' => ['id', 'desc']])->result_array();
 		$this->load->view('templates/header');
 		$this->load->view('stock/index', ['data' => $stock]);
 		$this->load->view('templates/footer');
@@ -29,7 +29,7 @@ class Stock extends CI_Controller
 
 	public function store()
 	{
-		$this->builder->setTable('stocks')->store([
+		$this->Builder->setTable('stocks')->store([
 			'nama_barang' => htmlspecialchars($this->input->post('nama_barang')),
 			'harga' => htmlspecialchars(implode('', explode('.', $this->input->post('harga')))),
 			'tgl_pembelian' => htmlspecialchars($this->input->post('tgl_pembelian')),
@@ -48,11 +48,11 @@ class Stock extends CI_Controller
 
 	public function destroy($id)
 	{
-		$stock = $this->builder->setTable('stocks')->get(['where' => ['id', $id]])->row_array();
+		$stock = $this->Builder->setTable('stocks')->get(['where' => ['id', $id]])->row_array();
 
 		if ($stock)
 		{
-			$this->builder->setTable('stocks')->delete(['id' => $id]);
+			$this->Builder->setTable('stocks')->delete(['id' => $id]);
 
 			$message = '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -68,7 +68,7 @@ class Stock extends CI_Controller
 
 	public function edit($id)
 	{
-		$stock = $this->builder->setTable('stocks')->get(['where' => ['id', $id]])->row_array();
+		$stock = $this->Builder->setTable('stocks')->get(['where' => ['id', $id]])->row_array();
 		if ($stock)
 		{
 			$this->load->view('templates/header');
@@ -81,7 +81,7 @@ class Stock extends CI_Controller
 
 	public function update($id)
 	{
-		$this->builder->setTable('stocks')->update(['id' => $id], [
+		$this->Builder->setTable('stocks')->update(['id' => $id], [
 			'nama_barang' => htmlspecialchars($this->input->post('nama_barang')),
 			'harga' => htmlspecialchars(implode('', explode('.', $this->input->post('harga')))),
 			'tgl_pembelian' => htmlspecialchars($this->input->post('tgl_pembelian')),
@@ -100,7 +100,7 @@ class Stock extends CI_Controller
 
 	public function excel()
 	{
-		$data = $this->builder->setTable('stocks')->get(['order_by' => ['id', 'desc']])->result_array();
+		$data = $this->Builder->setTable('stocks')->get(['order_by' => ['id', 'desc']])->result_array();
 		$this->load->view('stock/excel', ['data' => $data]);
 	}
 }

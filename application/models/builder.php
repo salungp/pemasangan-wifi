@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class builder extends CI_Model
+class Builder extends CI_Model
 {
 	private $table;
 	public function get($feature = null)
