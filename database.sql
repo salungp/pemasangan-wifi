@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Nov 2019 pada 02.47
+-- Waktu pembuatan: 03 Des 2019 pada 15.17
 -- Versi server: 10.4.6-MariaDB
 -- Versi PHP: 7.2.22
 
@@ -70,6 +70,14 @@ CREATE TABLE `pengguna` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `pengguna`
+--
+
+INSERT INTO `pengguna` (`id`, `name`, `address`, `phone_number`, `brandwith`, `tgl_pasang`, `ip_address`, `created_at`, `updated_at`) VALUES
+(14, 'arip', 'Pati', '082134647041', '3M', '2019-11-04 00:00:00', '172.16.0.117', '2019-12-03 13:40:50', '2019-12-03 13:43:59'),
+(15, 'Budi', 'Jepara', '089765345', '5M', '2019-12-06 00:00:00', '172.16.0.117', '2019-12-03 13:56:17', '2019-12-03 13:56:45');
+
 -- --------------------------------------------------------
 
 --
@@ -83,6 +91,7 @@ CREATE TABLE `stocks` (
   `harga` int(11) NOT NULL,
   `tgl_pembelian` datetime NOT NULL,
   `satuan` varchar(128) NOT NULL,
+  `status` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -171,31 +180,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemasangan`
 --
 ALTER TABLE `pemasangan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `telat_bayar`
 --
 ALTER TABLE `telat_bayar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
