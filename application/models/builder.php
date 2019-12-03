@@ -3,6 +3,12 @@
 class Builder extends CI_Model
 {
 	private $table;
+
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 	public function get($feature = null)
 	{	
 		if (!is_null($feature))

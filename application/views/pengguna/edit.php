@@ -29,7 +29,7 @@
 
           <div class="form-group">
             <label for="adress">Alamat</label>
-            <input type="text" name="adress" class="form-control" id="adress" placeholder="Masukkan alamat pengguna" value="<?php echo $data['adress']; ?>" required>
+            <input type="text" name="address" class="form-control" id="adress" placeholder="Masukkan alamat pengguna" value="<?php echo $data['address']; ?>" required>
           </div>
 
           <div class="form-group">

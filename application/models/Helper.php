@@ -4,6 +4,11 @@ class Helper extends CI_Model
 {
 	private $table   = 'pengguna';
 
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 	public function table($table)
 	{
 		$this->table = $table;
@@ -22,7 +27,7 @@ class Helper extends CI_Model
 			$month = date('m', strtotime($key['tgl_pasang']));
 			$year  = date('Y', strtotime($key['tgl_pasang']));
 
-			if ($day_now >= $day - 3 && $month_now == $month && $year_now == $year)
+			if ($day_now >= ($day - 3) && $month_now >= $month && $year_now >= $year)
 			{
 				if (!$telat_bayar = $this->db->get_where('telat_bayar', ['user' => $key['id']])->row_array())
 				{

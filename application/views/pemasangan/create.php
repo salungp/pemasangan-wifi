@@ -46,18 +46,55 @@
 
           <div class="form-group">
             <label for="bahan">Bahan</label>
-            <small>Tekan ctrl click untuk memilih lebih dari satu.</small>
-            <select name="bahan[]" id="bahan" class="form-control" multiple="<?php echo count($stocks); ?>" required>
+            <select name="bahan[]" id="bahan" class="form-control select2" multiple="multiple" data-placeholder="Pilih stok" required>
               <?php foreach($stocks as $key) : ?>
                 <option value="<?php echo $key['id']; ?>"><?php echo $key['nama_barang']; ?></option>
               <?php endforeach; ?>
             </select>
           </div>
 
+          <script src="https://maps.googleapis.com/maps/api/js"></script>
           <div class="form-group">
             <label for="titik_koordinat">Koordinat</label>
+            <div id="map" style="width: 100%;height: 400px;margin-bottom: 20px;"></div>
             <input type="text" name="titik_koordinat" class="form-control" id="titik_koordinat" placeholder="Masukkan titik koordinat lokasi" required>
           </div>
+          <script>
+            function initialize() {
+              let map = new google.maps.LatLng(-6.740821, 111.035638);
+              let properties = {
+                center: map,
+                zoom: 14,
+              };
+              
+              const container = new google.maps.Map(document.getElementById("map"), properties);
+              
+              let marker = new google.maps.Marker({
+                position: map,
+                map: container,
+                icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+              });
+
+              google.maps.event.addListener(container, 'click', function(event) {
+                addMarker(this, event.latLng);
+              });
+            }
+
+            var marker;
+            function addMarker(map, location) {
+              if (marker) {
+                marker.setPosition(location);
+              } else {
+               marker = new google.maps.Marker({
+                 position: location,
+                 map: map
+               });
+              }
+             document.querySelector('#titik_koordinat').value = location.lat()+','+location.lng();
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+          </script>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

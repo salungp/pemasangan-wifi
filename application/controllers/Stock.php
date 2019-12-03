@@ -14,7 +14,7 @@ class Stock extends CI_Controller
 
 	public function index()
 	{
-		$stock = $this->Builder->setTable('stocks')->get(['order_by' => ['id', 'desc']])->result_array();
+		$stock = $this->Builder->setTable('stocks')->get(['order_by' => ['id', 'desc'], 'where' => ['status', 0]])->result_array();
 		$this->load->view('templates/header');
 		$this->load->view('stock/index', ['data' => $stock]);
 		$this->load->view('templates/footer');
@@ -30,11 +30,12 @@ class Stock extends CI_Controller
 	public function store()
 	{
 		$this->Builder->setTable('stocks')->store([
-			'nama_barang' => htmlspecialchars($this->input->post('nama_barang')),
-			'harga' => htmlspecialchars(implode('', explode('.', $this->input->post('harga')))),
+			'nama_barang'   => htmlspecialchars($this->input->post('nama_barang')),
+			'harga'         => htmlspecialchars(implode('', explode('.', $this->input->post('harga')))),
 			'tgl_pembelian' => htmlspecialchars($this->input->post('tgl_pembelian')),
-			'satuan' => htmlspecialchars($this->input->post('satuan')),
-			'jumlah' => htmlspecialchars($this->input->post('jumlah'))
+			'satuan'        => htmlspecialchars($this->input->post('satuan')),
+			'jumlah'        => htmlspecialchars($this->input->post('jumlah')),
+			'status'        => 0
 		]);
 
 		$message = '<div class="alert alert-success alert-dismissible">
@@ -82,11 +83,11 @@ class Stock extends CI_Controller
 	public function update($id)
 	{
 		$this->Builder->setTable('stocks')->update(['id' => $id], [
-			'nama_barang' => htmlspecialchars($this->input->post('nama_barang')),
-			'harga' => htmlspecialchars(implode('', explode('.', $this->input->post('harga')))),
+			'nama_barang'   => htmlspecialchars($this->input->post('nama_barang')),
+			'harga'         => htmlspecialchars(implode('', explode('.', $this->input->post('harga')))),
 			'tgl_pembelian' => htmlspecialchars($this->input->post('tgl_pembelian')),
-			'satuan' => htmlspecialchars($this->input->post('satuan')),
-			'jumlah' => htmlspecialchars($this->input->post('jumlah'))
+			'satuan'        => htmlspecialchars($this->input->post('satuan')),
+			'jumlah'        => htmlspecialchars($this->input->post('jumlah'))
 		]);
 
 		$message = '<div class="alert alert-success alert-dismissible">

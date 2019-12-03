@@ -31,7 +31,7 @@ class Pengguna extends CI_Controller
 	{
 		$this->Builder->setTable('pengguna')->store([
 			'name'         => htmlspecialchars($this->input->post('name')),
-			'address'      => htmlspecialchars($this->input->post('adress')),
+			'address'      => htmlspecialchars($this->input->post('address')),
 			'phone_number' => $this->input->post('phone_number'),
 			'brandwith'    => htmlspecialchars($this->input->post('brandwith')),
 			'tgl_pasang'   => htmlspecialchars($this->input->post('tgl_pasang')),
@@ -82,10 +82,11 @@ class Pengguna extends CI_Controller
 	{
 		$this->Builder->setTable('pengguna')->update(['id' => $id], [
 			'name'         => htmlspecialchars($this->input->post('name')),
-			'address'      => htmlspecialchars($this->input->post('adress')),
+			'address'      => htmlspecialchars($this->input->post('address')),
 			'phone_number' => $this->input->post('phone_number'),
 			'brandwith'    => htmlspecialchars($this->input->post('brandwith')),
-			'tgl_pasang'   => htmlspecialchars($this->input->post('tgl_pasang'))
+			'ip_address'   => htmlspecialchars($this->input->post('ip_address')),
+			'tgl_pasang'   => htmlspecialchars(date('Y-m-d H:i:s', strtotime($this->input->post('tgl_pasang'))))
 		]);
 		$message = '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

@@ -22,7 +22,7 @@ class Pemasangan extends CI_Controller
 
 	public function create()
 	{
-		$stocks = $this->Builder->setTable('stocks')->get(['order_by' => ['id', 'desc']])->result_array();
+		$stocks = $this->Builder->setTable('stocks')->get(['order_by' => ['id', 'desc'], 'where' => ['status', 0]])->result_array();
 		$user   = $this->Builder->setTable('pengguna')->get(['order_by' => ['id', 'desc']])->result_array();
 		$this->load->view('templates/header');
 		$this->load->view('pemasangan/create', ['stocks' => $stocks, 'user' => $user]);
@@ -33,6 +33,9 @@ class Pemasangan extends CI_Controller
 	{
 		$bahan = [];
 		foreach ($this->input->post('bahan') as $key => $value) {
+			$this->Builder->setTable('stocks')->update(['id' => $value], [
+				'status' => 1
+			]);
 			array_push($bahan, $value);
 		}
 
@@ -54,6 +57,7 @@ class Pemasangan extends CI_Controller
 
 	public function destroy($id)
 	{
+		$this->db->update('stocks', ['status' => 0]);
 		$this->Builder->setTable('pemasangan')->delete(['id' => $id]);
 		$message = '<div class="alert alert-success alert-dismissible">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -87,6 +91,12 @@ class Pemasangan extends CI_Controller
 	{
 		$bahan = [];
 		foreach ($this->input->post('bahan') as $key => $value) {
+			$this->db->update('stocks', [
+				'status' => 0
+			]);
+			$this->Builder->setTable('stocks')->update(['id' => $value], [
+				'status' => 1
+			]);
 			array_push($bahan, $value);
 		}
 		

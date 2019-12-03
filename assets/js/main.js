@@ -1,7 +1,12 @@
 $(function() {
-  let currentLink = $('a[href="'+location.href+'"]').parents('li');
-  currentLink.addClass('active');
+  let currentLink = $('a[href="'+location.href+'"]').parents('li')
+  currentLink.addClass('active')
+	$('.select2').select2()
+	$('.datepicker').datepicker({
+		autoclose: true
+	});
 });
+
 
 $(function () {
   $('#example1').DataTable();
