@@ -23,7 +23,6 @@
           <div class="small-box bg-red">
             <div class="inner">
               <h3><?php echo count($telat_bayar); ?></h3>
-
               <p>Pembayaran H - 3</p>
             </div>
             <div class="icon">
@@ -38,7 +37,6 @@
           <div class="small-box bg-aqua">
             <div class="inner">
               <h3><?php echo count($stock); ?></h3>
-
               <p>Stock barang</p>
             </div>
             <div class="icon">
@@ -54,7 +52,6 @@
           <div class="small-box bg-green">
             <div class="inner">
               <h3><?php echo count($pengguna); ?></h3>
-
               <p>Pengguna</p>
             </div>
             <div class="icon">
@@ -70,7 +67,6 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3><?php echo count($pemasangan); ?></h3>
-
               <p>Pemasangan</p>
             </div>
             <div class="icon">
@@ -85,7 +81,7 @@
       <?php
         $koordinat = [];
         foreach($pemasangan as $key) {
-          array_push($koordinat, $key['titik_koordinat']); 
+          array_push($koordinat, $key['titik_koordinat']);
         }
       ?>
       <script src="https://maps.googleapis.com/maps/api/js"></script>
@@ -152,6 +148,7 @@
           for (let i = 0; i < geo.length; i++) {
             const id = eachData()[i].id;
             var koordinat = geo[i].split(',');
+            var position = eachSingle(id)['titik_koordinat'].split(',');
             var mapping = new google.maps.LatLng(parseFloat(koordinat[0]), parseFloat(koordinat[1]));
             var marker = new google.maps.Marker({
               position: mapping,
@@ -162,7 +159,7 @@
               content: `<h3 style="margin: 0;padding: 0;margin-bottom: 5px;">${eachData()[i].name}</h3>
                         <small style="display: block;margin-bottom: 5px;">${eachData()[i].address}</small>
                         <b>${eachData()[i].ip_address}</b>`,
-              position: {lat: parseFloat(eachSingle(id)['titik_koordinat'].split(',')[0]), lng: parseFloat(eachSingle(id)['titik_koordinat'].split(',')[1])}
+              position: {lat: parseFloat(position[0]), lng: parseFloat(eachSingle(id)['titik_koordinat'].split(',')[1])}
             });
 
             markerAll.push(marker);
@@ -175,7 +172,7 @@
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
-      </script>;
+      </script>
   </section>
   <!-- /.content -->
 </div>
