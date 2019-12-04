@@ -9,16 +9,16 @@ class Home extends CI_Controller
 		{
 			redirect('login');
 		}
-		$this->load->model(['Builder', 'Helper']);
+		$this->load->model('Helper');
 	}
 
 	public function index()
 	{
 		$this->Helper->find();
-		$stock       = $this->Builder->setTable('stocks')->get(['where' => ['id', 0]])->result_array();
-		$pengguna    = $this->Builder->setTable('pengguna')->get()->result_array();
-		$pemasangan  = $this->Builder->setTable('pemasangan')->get()->result_array();
-		$telat_bayar = $this->Builder->setTable('telat_bayar')->get()->result_array();
+		$stock       = $this->db->get_where('stocks', ['status' => 0])->result_array();
+		$pengguna    = $this->db->get('pengguna')->result_array();
+		$pemasangan  = $this->db->get('pemasangan')->result_array();
+		$telat_bayar = $this->db->get('telat_bayar')->result_array();
 
 		$this->load->view('templates/header');
 		$this->load->view('home/index', [

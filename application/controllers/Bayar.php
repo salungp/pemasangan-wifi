@@ -9,12 +9,12 @@ class Bayar extends CI_Controller
 		{
 			redirect('login');
 		}
-		$this->load->model('Builder');
 	}
 
 	public function index()
 	{
-		$data = $this->Builder->setTable('telat_bayar')->get(['order_by' => ['id', 'desc']])->result_array();
+		$this->db->order_by('id', 'desc');
+		$data = $this->db->get('telat_bayar')->result_array();
 		$this->load->view('templates/header');
 		$this->load->view('telat_bayar/index', ['data' => $data]);
 		$this->load->view('templates/footer');

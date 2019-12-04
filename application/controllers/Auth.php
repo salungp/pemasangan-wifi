@@ -34,7 +34,7 @@ class Auth extends CI_Controller
 	{
 		$user = $this->Builder->setTable('users')->get(['where' => ['username', $this->input->post('username')]])->row_array();
 
-		if ($_COOKIE['login_failed'] >= 5) {
+		if (@$_COOKIE['login_failed'] >= 5) {
 			$message = '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h4><i class="icon fa fa-ban"></i> Login pending!</h4>
@@ -61,7 +61,7 @@ class Auth extends CI_Controller
                 Maaf password salah!
               </div>';
 				$this->session->set_flashdata('message', $message);
-				redirect('login');	
+				redirect('login');
 			}
 		} else {
 			$this->login_failed();
@@ -77,16 +77,16 @@ class Auth extends CI_Controller
 
 	public function login_failed()
 	{
-		$old = $_COOKIE['login_failed'];
-		if ($_COOKIE['login_failed'] <= 5)
+		$old = @$_COOKIE['login_failed'];
+		if (@$_COOKIE['login_failed'] <= 5)
 		{
-			if (isset($_COOKIE['login_failed']))
+			if (@$_COOKIE['login_failed'])
 			{
 				setcookie('login_failed',$old+1,time()+(60 * 10),'/');
 			} else {
 				setcookie('login_failed',1,time()+(60 * 10),'/');
 			}
-		} else if ($_COOKIE['login_failed'] >= 5) {
+		} else if (@$_COOKIE['login_failed'] >= 5) {
 			setcookie('login_failed',1,time()+(60 * 10),'/');
 			$message = '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
