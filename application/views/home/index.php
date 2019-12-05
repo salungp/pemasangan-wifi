@@ -23,10 +23,10 @@
           <div class="small-box bg-red">
             <div class="inner">
               <h3><?php echo count($telat_bayar); ?></h3>
-              <p>Pembayaran H - 3</p>
+              <b>INVOICE</b>
             </div>
             <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+              <i class="fa fa-money"></i>
             </div>
             <a href="<?php echo base_url('bayar'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -37,10 +37,10 @@
           <div class="small-box bg-aqua">
             <div class="inner">
               <h3><?php echo count($stock); ?></h3>
-              <p>Stock barang</p>
+              <b>STOK</b>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+              <i class="fa fa-archive"></i>
             </div>
             <a href="<?php echo base_url('stock'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -52,10 +52,10 @@
           <div class="small-box bg-green">
             <div class="inner">
               <h3><?php echo count($pengguna); ?></h3>
-              <p>Pengguna</p>
+              <b>MEMBER</b>
             </div>
             <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+              <i class="fa fa-users"></i>
             </div>
             <a href="<?php echo base_url('pengguna'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -67,10 +67,10 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3><?php echo count($pemasangan); ?></h3>
-              <p>Pemasangan</p>
+              <b>PEMASANGAN</b>
             </div>
             <div class="icon">
-              <i class="ion ion-person-add"></i>
+              <i class="fa fa-gear"></i>
             </div>
             <a href="<?php echo base_url('pemasangan'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>

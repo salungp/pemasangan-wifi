@@ -17,8 +17,8 @@
   <?php echo $this->session->flashdata('message'); ?>
     <div class="box">
       <div class="box-header">
-        <a href="<?php echo base_url('pemasangan/create'); ?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-        <a href="<?php echo base_url('pemasangan/excel'); ?>" class="btn btn-default"><i class="fa fa-file-excel-o"></i></a>
+        <a href="<?php echo base_url('pemasangan/create'); ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+        <a href="<?php echo base_url('pemasangan/excel'); ?>" class="btn btn-default"><i class="fa fa-file-excel-o"></i> Ekspor excel</a>
       </div>
       <!-- /.box-header -->
       <div class="box-body">
