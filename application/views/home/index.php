@@ -23,7 +23,7 @@
           <div class="small-box bg-red">
             <div class="inner">
               <h3><?php echo count($telat_bayar); ?></h3>
-              <b>INVOICE</b>
+              <b>UNPAID INVOICE</b>
             </div>
             <div class="icon">
               <i class="fa fa-money"></i>
@@ -52,7 +52,7 @@
           <div class="small-box bg-green">
             <div class="inner">
               <h3><?php echo count($pengguna); ?></h3>
-              <b>MEMBER</b>
+              <b>CUSTOMERS</b>
             </div>
             <div class="icon">
               <i class="fa fa-users"></i>
@@ -89,7 +89,9 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header">
-              <h2 class="box-title">Pembagian wilayah pemasangan wifi</h2>
+              <h3 class="box-title">
+                Map
+              </h3>
             </div>
             <div class="box-body">
               <div id="map" style="width: 100%;height: 400px;"></div>
@@ -136,7 +138,7 @@
           var map = new google.maps.LatLng(-6.740821, 111.035638);
           var properties = {
             center: map,
-            zoom: 14,
+            zoom: 14
           }
 
           const geo = LatLng().split('|');

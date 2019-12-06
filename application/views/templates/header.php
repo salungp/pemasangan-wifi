@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/skins/skin-blue.min.css'); ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/dataTables.bootstrap.min.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/main.css'); ?>">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">

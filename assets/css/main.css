@@ -1,0 +1,28 @@
+#button-logo {
+	width: 230px;
+	height: 150px;
+	border-radius: 3px;
+	background: rgba(0,0,0,.16);
+	cursor: pointer;
+	transition: .2s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	position: relative;
+}
+
+#button-logo i {
+	font-size: 50px;
+	color: #888;
+}
+
+#button-logo img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: none;
+}

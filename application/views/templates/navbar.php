@@ -1,13 +1,16 @@
-<?php $user = $this->db->get_where('users', ['login_token' => $this->session->userdata('login_token')])->row_array(); ?>
+<?php
+  $user = $this->User->loggedIn();
+  $logo = $this->GeneralModel->logo();
+?>
 <?php $this->db->order_by('id', 'desc'); $notifications = $this->db->get('notifications')->result_array(); ?>
 <header class="main-header">
   <a href="<?php echo base_url('home'); ?>" class="logo">
     <span class="logo-mini">
-      <img src="<?php echo base_url('assets/img/image_dinusa.png'); ?>" style="width: 40px;" alt="logo app" />
+      <img src="<?php echo base_url('assets/sites/logo/'.$logo['value']); ?>" style="width: 40px;" alt="logo app" />
     </span>
 
     <span class="logo-lg">
-      <img src="<?php echo base_url('assets/img/image_dinusa.png'); ?>" style="width: 70px;" alt="logo app" />
+      <img src="<?php echo base_url('assets/sites/logo/'.$logo['value']); ?>" style="width: 70px;" alt="logo app" />
     </span>
   </a>
 
@@ -64,7 +67,10 @@
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
-              <div class="pull-center">
+              <div class="pull-left">
+                  <a href="<?php echo base_url('profile'); ?>" class="btn btn-default btn-flat">Profile</a>
+                </div>
+              <div class="pull-right">
                 <a href="<?php echo base_url('auth/logout'); ?>" class="btn btn-default btn-flat">Sign out</a>
               </div>
             </li>

@@ -9,7 +9,7 @@ class Home extends CI_Controller
 		{
 			redirect('login');
 		}
-		$this->load->model('Helper');
+		$this->load->model(['Helper']);
 	}
 
 	public function index()
