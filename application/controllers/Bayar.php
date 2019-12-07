@@ -9,12 +9,12 @@ class Bayar extends CI_Controller
 		{
 			redirect('login');
 		}
+		$this->load->model(['Invoice', 'Customers']);
 	}
 
 	public function index()
 	{
-		$this->db->order_by('id', 'desc');
-		$data = $this->db->get('telat_bayar')->result_array();
+		$data = $this->Invoice->order_by('id', 'desc')->All();
 		$this->load->view('templates/header');
 		$this->load->view('telat_bayar/index', ['data' => $data]);
 		$this->load->view('templates/footer');
@@ -22,7 +22,22 @@ class Bayar extends CI_Controller
 
 	public function excel()
 	{
-		$data = $this->Builder->setTable('telat_bayar')->get(['order_by' => ['id', 'desc']])->result_array();
+		$data = $this->Invoice->order_by('id', 'desc')->All();
 		$this->load->view('telat_bayar/excel', ['data' => $data]);
+	}
+
+	public function detail($id)
+	{
+		$data = $this->Invoice->detail($id);
+		$this->load->view('templates/header');
+		$this->load->view('telat_bayar/detail', ['data' => $data]);
+		$this->load->view('templates/footer');
+	}
+
+	public function destroy($id)
+	{
+		$this->Invoice->delete($id);
+		$this->Messages->alert('success', 'Data berhasil dihapus!');
+		redirect($this->agent->referrer());
 	}
 }

@@ -19,4 +19,11 @@ class Notification extends CI_Controller
 		$this->load->view('notification/index', ['data' => $data]);
 		$this->load->view('templates/footer');
 	}
+
+	public function clear()
+	{
+		$this->db->like('id', '');
+		$this->db->delete('notifications');
+		redirect($this->agent->referrer());
+	}
 }

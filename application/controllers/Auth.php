@@ -6,7 +6,6 @@ class Auth extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper('cookie');
-		$this->load->model('Builder');
 	}
 
 	public function index()
@@ -32,15 +31,10 @@ class Auth extends CI_Controller
 
 	public function authenticate()
 	{
-		$user = $this->Builder->setTable('users')->get(['where' => ['username', $this->input->post('username')]])->row_array();
+		$user = $this->User->where('username', $this->input->post('username'))->get()->row();
 
 		if (@$_COOKIE['login_failed'] >= 5) {
-			$message = '<div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-ban"></i> Login pending!</h4>
-                Maaf anda telah gagal login selama 5 kali. Mohon tunggu lagi hingga <span class="timer">10.00</span>
-              </div>';
-			$this->session->set_flashdata('message', $message);
+			$this->Messages->alert('danger', 'Maaf anda telah gagal login selama 5 kali. Mohon tunggu lagi hingga <span class="timer">10.00</span>');
 			redirect('login');
 			die;
 		}
@@ -55,22 +49,12 @@ class Auth extends CI_Controller
 				redirect('home');
 			} else {
 				$this->login_failed();
-				$message = '<div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-ban"></i> Wrong password!</h4>
-                Maaf password salah!
-              </div>';
-				$this->session->set_flashdata('message', $message);
+				$this->Messages->alert('danger', 'Maaf password salah!');
 				redirect('login');
 			}
 		} else {
 			$this->login_failed();
-			$message = '<div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-ban"></i> Email not found!</h4>
-                Maaf email tidak terdaftar!
-              </div>';
-			$this->session->set_flashdata('message', $message);
+			$this->Messages->alert('danger', 'Maaf email tidak terdaftar!');
 			redirect('login');
 		}
 	}
@@ -88,12 +72,7 @@ class Auth extends CI_Controller
 			}
 		} else if (@$_COOKIE['login_failed'] >= 5) {
 			setcookie('login_failed',1,time()+(60 * 10),'/');
-			$message = '<div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-ban"></i> Email not found!</h4>
-                Maaf anda telah gagal login selama 5 kali. Mohon tunggu lagi hingga <span class="timer">10.00</span> menit
-              </div>';
-			$this->session->set_flashdata('message', $message);
+			$this->Messages->alert('danger', 'Maaf anda telah gagal login selama 5 kali. Mohon tunggu lagi hingga <span class="timer">10.00</span> menit');
 			redirect('login');
 			die;
 		}

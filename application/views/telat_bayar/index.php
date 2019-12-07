@@ -15,22 +15,31 @@
     <div class="box">
       <div class="box-header">
         <a href="<?php echo $this->agent->referrer(); ?>" class="btn btn-danger">Kembali</a>
-        <a href="<?php echo base_url('telat_bayar/excel'); ?>" class="btn btn-default"><i class="fa fa-file-excel-o"></i></a>
+        <a href="<?php echo base_url('telat_bayar/excel'); ?>" class="btn btn-default"><i class="fa fa-file-excel-o"></i> Export</a>
       </div>
-      <!-- /.box-header -->
+
       <div class="box-body no-padding">
         <table class="table table-condensed">
           <tr>
             <th style="width: 10px">#</th>
+            <th>ACTION</th>
             <th>NAMA</th>
             <th>ALAMAT</th>
             <th>TGL PASANG</th>
           </tr>
           <?php $i = 1; ?>
           <?php foreach ($data as $key) : ?>
-          <?php $user = $this->db->get_where('pengguna', ['id' => $key['user']])->row_array(); ?>
+          <?php $user = $this->Customers->find($key['user']); ?>
             <tr>
               <td><?php echo $i++.'.'; ?></td>
+              <td>
+                <a href="<?php echo base_url('bayar/detail/'.$key['id']); ?>" class="btn btn-primary">
+                  <i class="fa fa-arrow-circle-right"></i>
+                </a>
+                <a href="<?php echo base_url('bayar/destroy/'.$key['id']); ?>" class="btn btn-danger">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
               <td><?php echo $user['name']; ?></td>
               <td><?php echo $user['address']; ?></td>
               <td><?php echo date('d M Y', strtotime($user['tgl_pasang'])); ?></td>

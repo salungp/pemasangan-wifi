@@ -14,7 +14,8 @@
   <?php echo $this->session->flashdata('message'); ?>
     <div class="box">
       <div class="box-header">
-        <a href="<?php echo $this->agent->referrer(); ?>" class="btn btn-danger">Kembali</a>
+        <a href="<?php echo base_url('home'); ?>" class="btn btn-primary">Kembali</a>
+        <a href="<?php echo base_url('notification/clear'); ?>" class="btn btn-danger" onclick="return window.confirm('Hapus semua notifikasi?');">Clear all</a>
       </div>
       <!-- /.box-header -->
       <div class="box-body no-padding">
