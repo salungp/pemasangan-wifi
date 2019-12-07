@@ -16,8 +16,7 @@ class Profile extends CI_Controller
 								? password_hash($this->input->post('password'), PASSWORD_DEFAULT)
 								: $old['password'];
 
-		$this->db->where('id', $old['id']);
-		$this->db->update('users', [
+		$this->User->where('id', $old['id'])->update('users', [
 			'username' => htmlspecialchars($this->input->post('username')),
 			'password' => $password
 		]);

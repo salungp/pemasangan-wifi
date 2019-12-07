@@ -9,12 +9,12 @@ class Pengguna extends CI_Controller
 		{
 			redirect('login');
 		}
-		$this->load->model('Builder');
+		$this->load->model('Customers');
 	}
 
 	public function index()
 	{
-		$data = $this->Builder->setTable('pengguna')->get(['order_by' => ['id', 'desc']])->result_array();
+		$data = $this->Customers->order_by('id', 'desc')->All();
 		$this->load->view('templates/header');
 		$this->load->view('pengguna/index', ['data' => $data]);
 		$this->load->view('templates/footer');
@@ -29,7 +29,7 @@ class Pengguna extends CI_Controller
 
 	public function store()
 	{
-		$this->Builder->setTable('pengguna')->store([
+		$this->Customers->store([
 			'name'         => htmlspecialchars($this->input->post('name')),
 			'address'      => htmlspecialchars($this->input->post('address')),
 			'phone_number' => $this->input->post('phone_number'),
@@ -44,10 +44,10 @@ class Pengguna extends CI_Controller
 
 	public function destroy($id)
 	{
-		$pengguna = $this->Builder->setTable('pengguna')->get(['where' => ['id', $id]])->row_array();
+		$pengguna = $this->Customers->find($id);
 		if ($pengguna)
 		{
-			$this->Builder->setTable('pengguna')->delete(['id' => $id]);
+			$this->Customers->delete($id);
 			$this->Messages->alert('success', 'Data berhasil dihapus!');
 			redirect($this->agent->referrer());
 		} else {
@@ -57,7 +57,7 @@ class Pengguna extends CI_Controller
 
 	public function edit($id)
 	{
-		$data = $this->Builder->setTable('pengguna')->get(['where' => ['id', $id]])->row_array();
+		$data = $this->Customers->find($id);
 		if ($data)
 		{
 			$this->load->view('templates/header');
@@ -70,7 +70,7 @@ class Pengguna extends CI_Controller
 
 	public function update($id)
 	{
-		$this->Builder->setTable('pengguna')->update(['id' => $id], [
+		$this->Customers->where('id', 'desc')->update([
 			'name'         => htmlspecialchars($this->input->post('name')),
 			'address'      => htmlspecialchars($this->input->post('address')),
 			'phone_number' => $this->input->post('phone_number'),
@@ -84,7 +84,7 @@ class Pengguna extends CI_Controller
 
 	public function excel()
 	{
-		$data = $this->Builder->setTable('pengguna')->get(['order_by' => ['id', 'desc']])->result_array();
+		$data = $this->Customers->order_by('id', 'desc')->All();
 		$this->load->view('pengguna/excel', ['data' => $data]);
 	}
 }

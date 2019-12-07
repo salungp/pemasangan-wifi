@@ -9,12 +9,12 @@ class Stock extends CI_Controller
 		{
 			redirect('login');
 		}
-		$this->load->model('Builder');
+		$this->load->model('Stocks');
 	}
 
 	public function index()
 	{
-		$stock = $this->Builder->setTable('stocks')->get(['order_by' => ['id', 'desc'], 'where' => ['status', 0]])->result_array();
+		$stock = $this->Stocks->order_by('id', 'desc')->where('status', 0)->All();
 		$this->load->view('templates/header');
 		$this->load->view('stock/index', ['data' => $stock]);
 		$this->load->view('templates/footer');
@@ -29,7 +29,7 @@ class Stock extends CI_Controller
 
 	public function store()
 	{
-		$this->Builder->setTable('stocks')->store([
+		$this->Stocks->store([
 			'nama_barang'   => htmlspecialchars($this->input->post('nama_barang')),
 			'harga'         => htmlspecialchars(implode('', explode('.', $this->input->post('harga')))),
 			'tgl_pembelian' => htmlspecialchars($this->input->post('tgl_pembelian')),
@@ -44,11 +44,11 @@ class Stock extends CI_Controller
 
 	public function destroy($id)
 	{
-		$stock = $this->Builder->setTable('stocks')->get(['where' => ['id', $id]])->row_array();
+		$stock = $this->Stocks->find($id);
 
 		if ($stock)
 		{
-			$this->Builder->setTable('stocks')->delete(['id' => $id]);
+			$this->Stocks->delete($id);
 
 			$this->Messages->alert('success', 'Data berhasil dihapus!');
 		} else {
@@ -58,7 +58,7 @@ class Stock extends CI_Controller
 
 	public function edit($id)
 	{
-		$stock = $this->Builder->setTable('stocks')->get(['where' => ['id', $id]])->row_array();
+		$stock = $this->Stocks->find($id);
 		if ($stock)
 		{
 			$this->load->view('templates/header');
@@ -71,7 +71,7 @@ class Stock extends CI_Controller
 
 	public function update($id)
 	{
-		$this->Builder->setTable('stocks')->update(['id' => $id], [
+		$this->Stocks->where('id', $id)->update([
 			'nama_barang'   => htmlspecialchars($this->input->post('nama_barang')),
 			'harga'         => htmlspecialchars(implode('', explode('.', $this->input->post('harga')))),
 			'tgl_pembelian' => htmlspecialchars($this->input->post('tgl_pembelian')),
@@ -85,7 +85,7 @@ class Stock extends CI_Controller
 
 	public function excel()
 	{
-		$data = $this->Builder->setTable('stocks')->get(['order_by' => ['id', 'desc']])->result_array();
+		$data = $this->Stocks->order_by('id', 'desc')->All();
 		$this->load->view('stock/excel', ['data' => $data]);
 	}
 }
