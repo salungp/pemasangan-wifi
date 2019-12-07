@@ -9,12 +9,12 @@ class Notification extends CI_Controller
 		{
 			redirect('login');
 		}
-		$this->load->model('Builder');
+		$this->load->model('Notifcations');
 	}
 
 	public function index()
 	{
-		$data = $this->Builder->setTable('notifications')->get(['order_by' => ['id', 'desc']])->result_array();
+		$data = $this->Notifications->order_by('id', 'desc')->all();
 		$this->load->view('templates/header');
 		$this->load->view('notification/index', ['data' => $data]);
 		$this->load->view('templates/footer');

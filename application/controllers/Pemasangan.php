@@ -46,12 +46,7 @@ class Pemasangan extends CI_Controller
 			'titik_koordinat' => htmlspecialchars($this->input->post('titik_koordinat'))
 		]);
 
-		$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil ditambah!
-              </div>';
-		$this->session->set_flashdata('message', $message);
+		$this->Messages->alert('success', 'Data berhasil ditambah!');
 		redirect($this->agent->referrer());
 	}
 
@@ -59,12 +54,7 @@ class Pemasangan extends CI_Controller
 	{
 		$this->db->update('stocks', ['status' => 0]);
 		$this->Builder->setTable('pemasangan')->delete(['id' => $id]);
-		$message = '<div class="alert alert-success alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <h4><i class="icon fa fa-check"></i> Success!</h4>
-              Data berhasil dihapus!
-            </div>';
-		$this->session->set_flashdata('message', $message);
+		$this->Messages->alert('success', 'Data berhasil dihapus');
 		redirect($this->agent->referrer());
 	}
 
@@ -99,7 +89,7 @@ class Pemasangan extends CI_Controller
 			]);
 			array_push($bahan, $value);
 		}
-		
+
 		$data = $this->Builder->setTable('pemasangan')->get(['where' => ['id', $id]])->row_array();
 		if ($data)
 		{
@@ -110,12 +100,7 @@ class Pemasangan extends CI_Controller
 				'titik_koordinat' => htmlspecialchars($this->input->post('titik_koordinat'))
 			]);
 
-			$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil diedit!
-              </div>';
-			$this->session->set_flashdata('message', $message);
+			$this->Messages->alert('success', 'Data berhasil diedit!');
 			redirect('pemasangan');
 		} else {
 			show_404();

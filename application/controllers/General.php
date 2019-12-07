@@ -24,12 +24,7 @@ class General extends CI_Controller
 			'value' => $api_key,
 			'author' => $user['id']
 		]);
-		$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil diubah!
-              </div>';
-		$this->session->set_flashdata('message', $message);
+		$this->Messages->alert('success', 'Data berhasil diubah!');
 		redirect($this->agent->referrer());
 	}
 
@@ -70,12 +65,7 @@ class General extends CI_Controller
     		'value' => $file,
     		'author' => $user['id']
     	]);
-    	$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil diubah!
-              </div>';
-			$this->session->set_flashdata('message', $message);
+    	$this->Messages->alert('success', 'Data berhasil diubah!');
 			redirect('general/logo_setting');
     }
 	}

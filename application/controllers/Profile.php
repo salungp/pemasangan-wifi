@@ -21,12 +21,7 @@ class Profile extends CI_Controller
 			'username' => htmlspecialchars($this->input->post('username')),
 			'password' => $password
 		]);
-		$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil diubah!
-              </div>';
-		$this->session->set_flashdata('message', $message);
+		$this->Messages->alert('success', 'Data berhasil diedit!');
 		redirect($this->agent->referrer());
 	}
 }

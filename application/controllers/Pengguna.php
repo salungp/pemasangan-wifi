@@ -38,12 +38,7 @@ class Pengguna extends CI_Controller
 			'ip_address'   => htmlspecialchars($this->input->post('ip_address'))
 		]);
 
-		$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil ditambah!
-              </div>';
-		$this->session->set_flashdata('message', $message);
+		$this->Messages->alert('success', 'Data berhasil ditambah!');
 		redirect($this->agent->referrer());
 	}
 
@@ -53,12 +48,7 @@ class Pengguna extends CI_Controller
 		if ($pengguna)
 		{
 			$this->Builder->setTable('pengguna')->delete(['id' => $id]);
-			$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil dihapus!
-              </div>';
-			$this->session->set_flashdata('message', $message);
+			$this->Messages->alert('success', 'Data berhasil dihapus!');
 			redirect($this->agent->referrer());
 		} else {
 			show_404();
@@ -88,12 +78,7 @@ class Pengguna extends CI_Controller
 			'ip_address'   => htmlspecialchars($this->input->post('ip_address')),
 			'tgl_pasang'   => htmlspecialchars(date('Y-m-d H:i:s', strtotime($this->input->post('tgl_pasang'))))
 		]);
-		$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil diedit!
-              </div>';
-		$this->session->set_flashdata('message', $message);
+		$this->Messages->alert('success', 'Data berhasil diupdate!');
 		redirect('pengguna');
 	}
 

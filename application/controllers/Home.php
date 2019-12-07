@@ -9,7 +9,7 @@ class Home extends CI_Controller
 		{
 			redirect('login');
 		}
-		$this->load->model(['Helper']);
+		$this->load->model(['Helper', 'Invoice']);
 	}
 
 	public function index()
@@ -18,7 +18,7 @@ class Home extends CI_Controller
 		$stock       = $this->db->get_where('stocks', ['status' => 0])->result_array();
 		$pengguna    = $this->db->get('pengguna')->result_array();
 		$pemasangan  = $this->db->get('pemasangan')->result_array();
-		$telat_bayar = $this->db->get('telat_bayar')->result_array();
+		$telat_bayar = $this->Invoice->All();
 
 		$this->load->view('templates/header');
 		$this->load->view('home/index', [

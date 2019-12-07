@@ -38,12 +38,7 @@ class Stock extends CI_Controller
 			'status'        => 0
 		]);
 
-		$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil ditambah!
-              </div>';
-		$this->session->set_flashdata('message', $message);
+		$this->Messages->alert('success', 'Data berhasil ditambah!');
 		redirect($this->agent->referrer());
 	}
 
@@ -55,13 +50,7 @@ class Stock extends CI_Controller
 		{
 			$this->Builder->setTable('stocks')->delete(['id' => $id]);
 
-			$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil dihapus!
-              </div>';
-			$this->session->set_flashdata('message', $message);
-			redirect($this->agent->referrer());
+			$this->Messages->alert('success', 'Data berhasil dihapus!');
 		} else {
 			show_404();
 		}
@@ -90,12 +79,7 @@ class Stock extends CI_Controller
 			'jumlah'        => htmlspecialchars($this->input->post('jumlah'))
 		]);
 
-		$message = '<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-check"></i> Success!</h4>
-                Data berhasil diedit!
-              </div>';
-		$this->session->set_flashdata('message', $message);
+		$this->Messages->alert('success', 'Data berhasil diupdate!');
 		redirect('stock');
 	}
 

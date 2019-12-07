@@ -86,19 +86,82 @@
       ?>
       <script src="https://maps.googleapis.com/maps/api/js"></script>
       <div class="row">
-        <div class="col-md-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">
-                Map
-              </h3>
+        <!-- Left col -->
+        <div class="col-md-8">
+          <!-- MAP & BOX PANE -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Map</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
             </div>
-            <div class="box-body">
-              <div id="map" style="width: 100%;height: 400px;"></div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div id="map" style="width: 100%;height: 380px;"></div>
             </div>
+            <!-- /.box-body -->
           </div>
         </div>
-      </div>
+        <div class="col-md-4">
+          <!-- Info Boxes Style 2 -->
+          <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-tasks"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">WEB SERVER</span>
+              <span class="info-box-number">
+                <?php
+                  $server = explode('/', @$_SERVER["SERVER_SOFTWARE"]);
+                  echo strtoupper($server[0]);
+                ?>
+              </span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-file-code-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">PHP ENGINE</span>
+              <span class="info-box-number">PHP <?php echo phpversion(); ?></span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+          <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-database"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">DATABASE</span>
+              <span class="info-box-number">
+                <?php
+                  $link = mysqli_connect('localhost', 'root', '');
+                  echo mysqli_get_server_info($link);
+                  mysqli_close($link);
+                ?>
+              </span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </row>
       <script>
         function LatLng() {
           <?php
