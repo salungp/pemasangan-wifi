@@ -5,18 +5,6 @@ class Customers extends CI_Model
 	private $table = 'pengguna';
 	public $query;
 
-	public function All()
-	{
-		$query = $this->db->get($this->table);
-		return $query->result_array();
-	}
-
-	public function find($id)
-	{
-		$query = $this->db->get_where($this->table, ['id' => $id]);
-		return $query->row_array();
-	}
-
 	public function get()
 	{
 		$query = $this->db->get($this->table);
