@@ -38,3 +38,13 @@
 	border: 3px solid red;
 	color: red;
 }
+
+.input-group a:nth-child(1) {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.input-group a:nth-child(2) {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}

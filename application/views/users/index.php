@@ -1,13 +1,15 @@
 <div class="content-wrapper">
   <?php $user = $this->User->loggedIn();
-    if ($user['role_id'] !== 1) : ?>
-      <div class="alert alert-danger alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4><i class="icon fa fa-ban"></i> Danger!</h4>
-        Maaf anda tidak ada akses untuk halaman ini!
+    if ($user['role_id'] != 1) : ?>
+      <div class="content-header">
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-ban"></i> Danger!</h4>
+          Maaf anda tidak ada akses untuk halaman ini!
+        </div>
       </div>
-  <?php endif; ?>
-  <section class="content-header">
+  <?php else : ?>
+    <section class="content-header">
     <h1>
       Admin users
     </h1>
@@ -22,58 +24,49 @@
       <div class="box-header with-border">
         <a href="<?php echo base_url('users'); ?>" class="btn btn-primary">
           <i class="fa fa-plus"></i>
-          <span>Tambah</span>
+          <span>Tambah user</span>
         </a>
       </div>
 
       <div class="box-body">
         <table class="table table-bordered">
           <tr>
-            <th style="width: 10px">#</th>
-            <th>Task</th>
-            <th>Progress</th>
-            <th style="width: 40px">Label</th>
+            <th style="width: 10px">NO</th>
+            <th>ACTION</th>
+            <th>USERNAME</th>
+            <th>ACCESS</th>
+            <th>CREATED AT</th>
           </tr>
-          <tr>
-            <td>1.</td>
-            <td>Update software</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-red">55%</span></td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Clean database</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-yellow">70%</span></td>
-          </tr>
-          <tr>
-            <td>3.</td>
-            <td>Cron job running</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-light-blue">30%</span></td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Fix and squish bugs</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-green">90%</span></td>
-          </tr>
+          <?php $i = 1; foreach($data as $key) : ?>
+            <tr>
+              <td><?php echo $i++; ?>.</td>
+              <td>
+                <div class="input-group">
+                  <a href="<?php echo base_url('users/'.$key['id'].'/edit'); ?>" class="btn btn-primary">
+                    <i class="fa fa-plus"></i>
+                  </a>
+                  <a href="<?php echo base_url('users/'.$key['id'].'/destroy'); ?>" class="btn btn-danger">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </div>
+              </td>
+              <td><?php echo $key['username']; ?></td>
+              <td>
+                <?php
+                  switch ($key['role_id']) {
+                    case 1:
+                      echo '<span class="badge bg-success">Admin</span>';
+                      break;
+                    
+                    case 2:
+                      echo '<span class="badge bg-warning">Editor</span>';
+                      break;
+                  }
+                ?>
+              </td>
+              <td><?php echo date('d M Y', strtotime($key['created_at'])); ?></td>
+            </tr>
+          <?php endforeach; ?>
         </table>
       </div>
       <!-- /.box-body -->
@@ -88,4 +81,5 @@
       </div>
     </div>
   </section>
+  <?php endif; ?>
 </div>
