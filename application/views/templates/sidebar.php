@@ -30,6 +30,7 @@
         <ul class="treeview-menu">
           <li><a href="<?php echo base_url('general/maps_api_setting'); ?>"><i class="fa fa-circle-o"></i> Maps API setting</a></li>
           <li><a href="<?php echo base_url('general/logo_setting'); ?>"><i class="fa fa-circle-o"></i> Logo site</a></li>
+          <li><a href="<?php echo base_url('users'); ?>"><i class="fa fa-circle-o"></i> Admin users</a></li>
         </ul>
       </li>
     </ul>
