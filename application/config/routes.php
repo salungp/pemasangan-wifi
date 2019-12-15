@@ -62,6 +62,10 @@ $route['pemasangan/(:any)/destroy'] = 'pemasangan/destroy/$1';
 $route['pemasangan/(:any)/edit'] = 'pemasangan/edit/$1';
 $route['pemasangan/(:any)/update'] = 'pemasangan/update/$1';
 
+$route['users/(:any)/edit'] = 'users/edit/$1';
+$route['users/(:any)/update'] = 'users/update/$1';
+$route['users/(:any)/destroy'] = 'users/destroy/$1';
+
 $route['login'] = 'auth/index';
 
 $route['default_controller'] = 'home';
